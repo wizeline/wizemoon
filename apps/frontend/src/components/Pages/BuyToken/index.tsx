@@ -44,18 +44,6 @@ const BuyToken: React.FC = () => {
           https://pancake.kiemtienonline360.com/#/swap
         </a>
       </Typography>
-      <Typography>
-        If it is the first time you use DEX, please refer to the tutorial below
-      </Typography>
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/q64trei__EA"
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
     </div>
   );
 };
