@@ -8,7 +8,7 @@ import {
 } from '../configurations/blockchain';
 import contractABI from '../configurations/contracts/TokenContractABI';
 
-export default function useConKetContract() {
+export default function useWizeMoonContract() {
   const { library: web3, account } = useWeb3React<Web3>();
 
   const sendToken = async function (amount: string) {
