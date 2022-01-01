@@ -6,7 +6,7 @@ import {
   RECEIVER_ADDRESS,
   WIZEMOON_CONTRACT_ADDRESS,
 } from '../configurations/blockchain';
-import contractABI from '../configurations/contracts/TokenContractABI';
+import contractABI from '../configurations/contracts/WizeMoonContractABI.json';
 
 export default function useWizeMoonContract() {
   const { library: web3, account } = useWeb3React<Web3>();
@@ -18,7 +18,7 @@ export default function useWizeMoonContract() {
     try {
       //TODO: Cache contract instance creation.
       const contractInstance = new web3.eth.Contract(
-        contractABI as unknown as AbiItem,
+        contractABI as unknown as AbiItem[],
         WIZEMOON_CONTRACT_ADDRESS,
         {
           from: account || '',
@@ -40,9 +40,10 @@ export default function useWizeMoonContract() {
         });
         return;
       }
-      const txHash = await contractInstance.methods
+      const transaction = await contractInstance.methods
         .transfer(RECEIVER_ADDRESS, weiAmount)
         .send();
+      console.log({ transaction });
     } catch (error) {
       notification.error({
         placement: 'bottomRight',
