@@ -4,7 +4,6 @@ import cors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 import endpoints from './endpoints';
 import { errorHandler } from './middlewares/error-handler';
-import { getBalanceOf } from './clients/web3';
 
 const app = new Koa();
 
