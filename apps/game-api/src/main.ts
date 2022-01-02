@@ -1,16 +1,15 @@
-import path from 'path';
-import dotenv from 'dotenv';
-
-const APP_ENV = process.env.APP_ENV || 'local';
-
-dotenv.config({
-  path: path.resolve(process.cwd(), `.${APP_ENV}.env`),
-});
+import './utils/load-env';
+import 'reflect-metadata';
 
 import app from './app';
+import { waitForDBConnection } from './clients/postgres';
+import logger from './utils/logger';
 
 const port = process.env.PORT || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/health`);
+waitForDBConnection(() => {
+  app
+    .listen(port, () => {
+      logger.info(`Listening at http://localhost:${port}/health`);
+    })
+    .on('error', console.error);
 });
-server.on('error', console.error);

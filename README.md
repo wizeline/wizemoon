@@ -24,7 +24,6 @@ WIZEMOON Game Contract: TDB
 
 PancakeSwap Testnet: https://pancake.kiemtienonline360.com/#/swap
 
-
 ## Prerequisite
 
 - Node
@@ -37,12 +36,13 @@ PancakeSwap Testnet: https://pancake.kiemtienonline360.com/#/swap
 
 ### Game API
 
-`yarn start game-api`
+`docker compose up`
 
 ## Deployment
-
 
 ### Build
 
 - Frontend `yarn build frontend --target=production`
 - Game API `docker build -t game-api --build-arg=SERVICE_NAME=game-api --target=production .`
+
+  RUN : `docker run -p 3333:3333 --rm game-api`
