@@ -1,0 +1,24 @@
+
+GET http://localhost:3000/api
+
+### Pokenmons
+
+GET http://localhost:3000/api/v1/pokemons
+
+### New pokemon
+POST http://localhost:3000/api/v1/pokemons HTTP/1.1
+content-type: application/json
+
+{
+    "id":1,
+    "name": "sample1",
+    "initialPrice": "1000.00",
+    "owner":"",
+    "url":"1"
+}
+
+
+
+### Import pokemon
+POST http://localhost:3000/api/v1/pokemons/import?limit=100&offset=101
+content-type: application/json

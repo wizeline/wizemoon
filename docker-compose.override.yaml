@@ -1,21 +1,8 @@
 version: '3.8'
 services:
   game-api:
-    build:
-      context: ./
-      target: development
-      args:
-        SERVICE_NAME: 'game-api'
-    restart: 'on-failure'
-    depends_on:
-      - db
-    volumes:
-      - .:/workdir
-    ports:
-      - 3000:3000
-      - 9229:9229
-    environment:
-      PORT: 3000
+    command: echo "Please use `yarn start game-api` instead"
+    restart: 'no'
   db:
     image: postgres:13-bullseye
     restart: always
