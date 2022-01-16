@@ -1,9 +1,0 @@
-
-### Get Health
-
-GET http://localhost:3333/health
-
-
-### get account balance
-
-GET http://localhost:3333/api/v1/pokemons

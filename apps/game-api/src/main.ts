@@ -1,15 +1,26 @@
-import './utils/load-env';
-import 'reflect-metadata';
+/**
+ * This is not a production server yet!
+ * This is only a minimal backend to get started.
+ */
 
-import app from './app';
-import { waitForDBConnection } from './clients/postgres';
-import logger from './utils/logger';
+import { Logger, VersioningType } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 
-const port = process.env.PORT || 3333;
-waitForDBConnection(() => {
-  app
-    .listen(port, () => {
-      logger.info(`Listening at http://localhost:${port}/health`);
-    })
-    .on('error', console.error);
-});
+import { AppModule } from './app/app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  const globalPrefix = 'api';
+  app.setGlobalPrefix(globalPrefix);
+  const port = process.env.PORT || 3333;
+  app.enableVersioning({
+    defaultVersion: '1',
+    type: VersioningType.URI,
+  });
+  await app.listen(port);
+  Logger.log(
+    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+  );
+}
+
+bootstrap();
