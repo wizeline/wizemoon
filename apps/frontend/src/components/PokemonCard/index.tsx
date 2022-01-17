@@ -9,11 +9,11 @@ const PokemonCard: React.FC<{
   pokemon: Pokemon;
 }> = ({ pokemon }) => {
   const { active } = useWeb3React();
-  const id = pokemon.url.slice(0, -1).split('/').pop();
+  const id = pokemon.id;
   const { sendToken } = useWizeMoonContract();
 
   const handleBuyItem = async () => {
-    const amount = id || '0';
+    const amount = pokemon.initialPrice || '0';
     await sendToken(amount);
   };
 
@@ -25,7 +25,7 @@ const PokemonCard: React.FC<{
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
       />
       <Typography>
-        Price: <strong>${id} WIZEMOON</strong>
+        Price: <strong>{pokemon.initialPrice} WIZEMOON</strong>
       </Typography>
       <Button
         disabled={!active}
