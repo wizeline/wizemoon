@@ -27,7 +27,7 @@ export class PokemonsService {
       name: name,
       id: url
         .split('/')
-        .filter((c) => c)
+        .filter((segment: string) => segment)
         .pop(),
       owner: null,
       url,

@@ -48,6 +48,46 @@
         "jestConfig": "apps/game-api/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "migrationGenerate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:generate -n {args.name}"
+        ],
+        "cwd": "apps/game-api",
+        "parallel": false
+      }
+    },
+    "migrationCreate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:create -o -n {args.name}"
+        ],
+        "cwd": "apps/game-api",
+        "parallel": false
+      }
+    },
+    "migrationRun": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:run"
+        ],
+        "cwd": "apps/game-api",
+        "parallel": false
+      }
+    },
+    "migrationRevert": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:revert"
+        ],
+        "cwd": "apps/game-api",
+        "parallel": false
+      }
     }
   },
   "tags": []

@@ -1,26 +1,35 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, BaseEntity } from 'typeorm';
 
-@Entity()
+@Entity({
+  name: 'Pokemon',
+})
 export class Pokemon {
-  @PrimaryColumn()
+  @PrimaryColumn({
+    name: 'PokemonID',
+  })
   id: number;
 
-  @Column()
+  @Column({
+    name: 'Name',
+  })
   name: string;
 
-  @Column()
+  @Column({
+    name: 'Url',
+  })
   url: string;
 
   @Column({
+    name: 'Owner',
     nullable: true,
   })
   owner: string;
 
   @Column({
-    name: 'initial_price',
+    name: 'InitialPrice',
   })
   initialPrice: string;
 
-  @Column({ default: true })
+  @Column({ name: 'IsActive', default: true })
   isActive: boolean;
 }

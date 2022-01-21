@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { getConnectionOptions } from 'typeorm';
-import { Pokemon } from '../endpoints/pokemons/entities/pokemon.entity';
+import { getConnectionOptions, getMetadataArgsStorage } from 'typeorm';
 import { PokemonsModule } from '../endpoints/pokemons/pokemons.module';
 
 import { AppController } from './app.controller';
@@ -19,8 +18,7 @@ const APP_ENV = process.env.APP_ENV || 'local';
       useFactory: async () => {
         const options = await getConnectionOptions();
         return Object.assign(options, {
-          autoLoadEntities: true,
-          entities: [Pokemon],
+          entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
         });
       },
     }),
