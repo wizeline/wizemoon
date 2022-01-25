@@ -53,7 +53,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:generate -n {args.name}"
+          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:generate"
         ],
         "cwd": "apps/game-api",
         "parallel": false
@@ -63,7 +63,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:create -o -n {args.name}"
+          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:create"
         ],
         "cwd": "apps/game-api",
         "parallel": false
@@ -84,6 +84,16 @@
       "options": {
         "commands": [
           "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:revert"
+        ],
+        "cwd": "apps/game-api",
+        "parallel": false
+      }
+    },
+    "compileMigration": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "npx tsc src/migrations/database/*.ts --types node --outDir ../../dist/apps/game-api/migrations/database"
         ],
         "cwd": "apps/game-api",
         "parallel": false

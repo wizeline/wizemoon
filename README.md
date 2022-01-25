@@ -38,6 +38,11 @@ PancakeSwap Testnet: https://pancake.kiemtienonline360.com/#/swap
 
 `docker compose up`
 
+### Migration
+
+- create `yarn typeorm migration:create -f apps/game-api/.env.local -d apps/game-api/src/migrations/database -n NewMigration`
+- create `yarn typeorm migration:run -f apps/game-api/.env.local`
+
 ## Deployment
 
 ### Build
