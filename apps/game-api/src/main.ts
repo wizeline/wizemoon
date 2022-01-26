@@ -7,8 +7,8 @@ import { AppModule } from './config/app/app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
+  const GLOBAL_PREFIX = 'api';
+  app.setGlobalPrefix(GLOBAL_PREFIX);
 
   app.enableCors();
 
@@ -17,10 +17,10 @@ async function bootstrap() {
     type: VersioningType.URI,
   });
 
-  const port = process.env.PORT || 3333;
-  await app.listen(port);
+  const PORT = process.env.PORT || 3333;
+  await app.listen(PORT);
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Application is running on: http://localhost:${PORT}/${GLOBAL_PREFIX}`
   );
 }
 

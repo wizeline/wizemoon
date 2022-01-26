@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { TerminusModule } from '@nestjs/terminus';
 import { PokemonsModule } from '../../endpoints/pokemons/pokemons.module';
 
 import { AppController } from './app.controller';
@@ -8,6 +9,7 @@ import { AppService } from './app.service';
 const APP_ENV = process.env.APP_ENV || 'local';
 
 import { DatabaseProviderModule } from '../../providers/database.module';
+import { HealthModule } from '../../endpoints/health/health.module';
 
 @Module({
   imports: [
@@ -16,6 +18,7 @@ import { DatabaseProviderModule } from '../../providers/database.module';
     }),
     DatabaseProviderModule,
     PokemonsModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
