@@ -1691,6 +1691,13 @@
     jsonc-parser "3.0.0"
     pluralize "8.0.0"
 
+"@nestjs/terminus@^8.0.4":
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/terminus/-/terminus-8.0.4.tgz#6b4f74a904c7ded8d6a335e2900ddcd497e5efee"
+  integrity sha512-KjeY7VLt0Az6pA2wO67nkL1QbE68yBb+FLZ7+aa+C/g/IKoDR668nqSuFzJarBrnFBTGEwDD09BwsgqkmymrbQ==
+  dependencies:
+    check-disk-space "3.1.0"
+
 "@nestjs/testing@^8.0.0":
   version "8.2.5"
   resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-8.2.5.tgz#48bd875649f606a5aec856573b5c16795473cc0f"
@@ -4352,6 +4359,11 @@ char-regex@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/char-regex/-/char-regex-1.0.2.tgz"
   integrity sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
+
+check-disk-space@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/check-disk-space/-/check-disk-space-3.1.0.tgz#3a90e0b27533e06ddcfafd93b749f2514fc12d90"
+  integrity sha512-4L3WVw4uPaBJocwnxTCWTTHc8mNu080pjCVBhZeWFdnaQBAremLHpJ1H90G+uEA0rJcW43fghYMsLBXID9X4Zg==
 
 check-more-types@^2.24.0:
   version "2.24.0"

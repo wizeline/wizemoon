@@ -1,9 +1,14 @@
 
+###
+http://localhost:3000/api/health
+
+###
 GET http://localhost:3000/api
 
 ### Pokenmons
 
 GET http://localhost:3000/api/v1/pokemons
+
 
 ### New pokemon
 POST http://localhost:3000/api/v1/pokemons HTTP/1.1
