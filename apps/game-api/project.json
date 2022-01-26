@@ -21,7 +21,7 @@
       },
       "configurations": {
         "production": {
-          "optimization": true,
+          "optimization": false,
           "generatePackageJson": true,
           "extractLicenses": true,
           "inspect": false
@@ -47,56 +47,6 @@
       "options": {
         "jestConfig": "apps/game-api/jest.config.js",
         "passWithNoTests": true
-      }
-    },
-    "migrationGenerate": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:generate"
-        ],
-        "cwd": "apps/game-api",
-        "parallel": false
-      }
-    },
-    "migrationCreate": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:create"
-        ],
-        "cwd": "apps/game-api",
-        "parallel": false
-      }
-    },
-    "migrationRun": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:run"
-        ],
-        "cwd": "apps/game-api",
-        "parallel": false
-      }
-    },
-    "migrationRevert": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "ts-node --project ./tsconfig.app.json ../../node_modules/.bin/typeorm migration:revert"
-        ],
-        "cwd": "apps/game-api",
-        "parallel": false
-      }
-    },
-    "compileMigration": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "npx tsc src/migrations/database/*.ts --types node --outDir ../../dist/apps/game-api/migrations/database"
-        ],
-        "cwd": "apps/game-api",
-        "parallel": false
       }
     }
   },
