@@ -6,7 +6,6 @@ http://localhost:3000/api/health
 GET http://localhost:3000/api
 
 ### Pokenmons
-
 GET http://localhost:3000/api/v1/pokemons
 
 
@@ -27,3 +26,15 @@ content-type: application/json
 ### Import pokemon
 POST http://localhost:3000/api/v1/pokemons/import?limit=100&offset=101
 content-type: application/json
+
+
+
+
+### Import pokemon
+POST https://game-api.onrender.com/api/v1/pokemons/import?limit=100&offset=101
+content-type: application/json
+
+
+
+### Pokenmons
+GET https://game-api.onrender.com/api/v1/pokemons
