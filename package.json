@@ -8,7 +8,8 @@
     "build": "nx build",
     "test": "nx test",
     "prepare": "husky install",
-    "clean": "npx rimraf node_modules dist build"
+    "clean": "npx rimraf dist build",
+    "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.4",
@@ -19,6 +20,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.2",
     "@reduxjs/toolkit": "^1.7.1",
+    "@types/webpack-env": "^1.16.3",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "antd": "^4.17.3",

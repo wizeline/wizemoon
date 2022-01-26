@@ -38,6 +38,12 @@ PancakeSwap Testnet: https://pancake.kiemtienonline360.com/#/swap
 
 `docker compose up`
 
+### Database migration
+
+Currently, The project only supports run migration automatically when the app startup due to an issue of Webpack with TypeORM.
+
+- Creating a new migration: `yarn typeorm migration:create -d apps/game-api/src/migrations/database -n NewMigration`
+
 ## Deployment
 
 ### Build
