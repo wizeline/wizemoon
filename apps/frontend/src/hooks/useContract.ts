@@ -33,10 +33,6 @@ export default function useWizeMoonContract() {
         notification.warn({
           placement: 'bottomRight',
           message: 'Not enough WIZEMOON',
-          description: 'You can buy more WIZEMOON here',
-          onClick: () => {
-            console.log('Notification Clicked!');
-          },
         });
         return;
       }
@@ -44,6 +40,7 @@ export default function useWizeMoonContract() {
         .transfer(RECEIVER_ADDRESS, weiAmount)
         .send();
       console.log({ transaction });
+      return transaction;
     } catch (error) {
       notification.error({
         placement: 'bottomRight',

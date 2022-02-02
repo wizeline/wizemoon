@@ -1,35 +1,13 @@
-import { useWeb3React } from '@web3-react/core';
 import { Button, Typography } from 'antd';
 import React from 'react';
-import Web3 from 'web3';
-import { toHex } from 'web3-utils';
 import {
   WIZEMOON_CONTRACT_ADDRESS,
   WIZEMOON_CONTRACT_SYMBOL,
 } from '../../../configurations/blockchain';
-import { BSC_TESTNET } from '../../../configurations/wallets/injected';
 import { useWalletContext } from '../../../hooks/useWallet';
 
 const BuyToken: React.FC = () => {
-  const { chainId } = useWeb3React<Web3>();
-  const { switchChain, watchAsset } = useWalletContext();
-
-  const handleAddBSC = async () => {
-    await switchChain({
-      chainId: toHex(97),
-      blockExplorerUrls: ['https://testnet.bscscan.com'],
-      chainName: 'Binance Smart Chain - Testnet',
-      iconUrls: [
-        'https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png',
-      ],
-      nativeCurrency: {
-        decimals: 18,
-        name: 'BNB',
-        symbol: 'BNB',
-      },
-      rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
-    });
-  };
+  const { watchAsset } = useWalletContext();
 
   const handleAddToken = async () => {
     await watchAsset({
@@ -45,12 +23,6 @@ const BuyToken: React.FC = () => {
   return (
     <div>
       <Typography.Title level={3}>Buy WIZEMOON token</Typography.Title>
-      <Button
-        onClick={handleAddBSC}
-        disabled={Boolean(chainId && chainId === BSC_TESTNET)}
-      >
-        Switch to Binance Smart Chain Testnet
-      </Button>
       <Button
         onClick={handleAddToken}
         style={{
@@ -77,9 +49,7 @@ const BuyToken: React.FC = () => {
       <Typography>
         WIZEMOON contract address:{' '}
         <a
-          href={
-            'https://testnet.bscscan.com/token/' + WIZEMOON_CONTRACT_ADDRESS
-          }
+          href={`https://testnet.bscscan.com/token/${WIZEMOON_CONTRACT_ADDRESS}`}
           target="_blank"
           title={WIZEMOON_CONTRACT_ADDRESS}
           rel="noreferrer"
