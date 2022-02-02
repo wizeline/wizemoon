@@ -41,11 +41,11 @@ const PokemonCard: React.FC<{
         Price: <strong>{pokemon.initialPrice} WIZEMOON</strong>
       </Typography>
       <Button
-        disabled={!active || chainId !== BSC_TESTNET_ID}
+        disabled={!active || chainId !== BSC_TESTNET_ID || !!pokemon.owner}
         onClick={handleBuyItem}
         title={active ? 'Click to Buy' : 'Connect wallet first'}
       >
-        BUY
+        {pokemon.owner ? 'SOLD' : 'BUY'}
       </Button>
     </StyledPokemonCard>
   );
