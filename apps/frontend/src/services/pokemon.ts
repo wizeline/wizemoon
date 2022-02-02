@@ -10,7 +10,14 @@ export const gameApi = createApi({
     getPokemonList: builder.query<Pokemon[], void>({
       query: () => `v1/pokemons`,
     }),
+    createOrder: builder.mutation({
+      query: (bodyData) => ({
+        url: `v1/orders`,
+        method: 'POST',
+        body: bodyData,
+      }),
+    }),
   }),
 });
 
-export const { useGetPokemonListQuery } = gameApi;
+export const { useGetPokemonListQuery, useCreateOrderMutation } = gameApi;
