@@ -6,11 +6,15 @@ import { Pokemon } from '../../types/pokemon';
 import { StyledPokemonCard } from './styled';
 import Web3 from 'web3';
 import { BSC_TESTNET_ID } from '../../constants';
-import { useCreateOrderMutation } from '../../services/pokemon';
+import {
+  useCreateOrderMutation,
+  useGetPokemonListQuery,
+} from '../../services/pokemon';
 
 const PokemonCard: React.FC<{
   pokemon: Pokemon;
 }> = ({ pokemon }) => {
+  const { refetch } = useGetPokemonListQuery();
   const { active, chainId } = useWeb3React<Web3>();
   const id = pokemon.id;
   const { sendToken } = useWizeMoonContract();
@@ -27,6 +31,7 @@ const PokemonCard: React.FC<{
         toAddress: transaction.to,
         transactionJson: JSON.stringify(transaction),
       });
+      refetch();
     }
   };
 

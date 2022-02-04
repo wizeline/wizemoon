@@ -4,7 +4,12 @@ import PokemonCard from '../../PokemonCard';
 import { useGetPokemonListQuery } from '../../../services/pokemon';
 
 const ItemList: React.FC = () => {
-  const { data: pokemonList, error, isLoading } = useGetPokemonListQuery();
+  const {
+    data: pokemonList,
+    error,
+    isLoading,
+    refetch,
+  } = useGetPokemonListQuery();
   return (
     <div>
       <Typography.Title level={3}>Pokemon page</Typography.Title>
