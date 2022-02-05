@@ -14,6 +14,18 @@ GET http://localhost:3000/api/v1/pokemons
 GET http://localhost:3000/api/v1/orders
 
 
+### Orders - Transactions - Data
+GET http://localhost:3000/api/v1/orders/transactions/0x41bdedf93fc2022194074bfbb234b9b4bab5a6be4257dab87991a78607518bc6
+
+### Test
+GET http://localhost:3000/api/v1/nft-items/balance-of/0x45d8253c7980d5718C5Fa3626d446886Fd857CfE
+
+
+
+### Test Options
+GET http://localhost:3000/api/v1/nft-items/token-uri/4
+
+
 ### Create an Order
 POST http://localhost:3000/api/v1/orders
 content-type: application/json
