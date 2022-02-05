@@ -1,7 +1,9 @@
+import { useMemo } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { notification } from 'antd';
 import Web3 from 'web3';
 import { AbiItem, toBN, toWei } from 'web3-utils';
+import { Contract } from 'web3-eth-contract';
 import {
   RECEIVER_ADDRESS,
   WIZEMOON_CONTRACT_ADDRESS,
@@ -11,20 +13,26 @@ import contractABI from '../configurations/contracts/WizeMoonContractABI.json';
 export default function useWizeMoonContract() {
   const { library: web3, account } = useWeb3React<Web3>();
 
+  const contractInstance = useMemo(() => {
+    if (!web3) {
+      return;
+    }
+    return new web3.eth.Contract(
+      contractABI as unknown as AbiItem[],
+      WIZEMOON_CONTRACT_ADDRESS,
+      {
+        from: account || '',
+      }
+    );
+  }, [web3, account]);
+
   const sendToken = async function (amount: string) {
     if (!web3) {
       return;
     }
     try {
       //TODO: Cache contract instance creation.
-      const contractInstance = new web3.eth.Contract(
-        contractABI as unknown as AbiItem[],
-        WIZEMOON_CONTRACT_ADDRESS,
-        {
-          from: account || '',
-        }
-      );
-      const weiBalance = await contractInstance.methods
+      const weiBalance = await contractInstance?.methods
         .balanceOf(account)
         .call();
       // Dont use toWei if your token decimals is different than 18.
@@ -36,7 +44,7 @@ export default function useWizeMoonContract() {
         });
         return;
       }
-      const transaction = await contractInstance.methods
+      const transaction = await contractInstance?.methods
         .transfer(RECEIVER_ADDRESS, weiAmount)
         .send();
       console.log({ transaction });
@@ -59,15 +67,11 @@ export default function useWizeMoonContract() {
       return;
     }
     try {
-      const instance = new web3.eth.Contract(
-        contractABI as unknown as AbiItem,
-        WIZEMOON_CONTRACT_ADDRESS
-      );
-      return await instance.methods.balanceOf(account).call();
+      return await contractInstance?.methods.balanceOf(account).call();
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { sendToken, getBalance };
+  return { sendToken, getBalance, contractInstance };
 }

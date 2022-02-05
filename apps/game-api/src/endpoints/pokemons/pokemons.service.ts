@@ -41,7 +41,11 @@ export class PokemonsService {
   }
 
   findAll(): Promise<Pokemon[]> {
-    return this.pokemonRepository.find();
+    return this.pokemonRepository.find({
+      order: {
+        id: 'ASC',
+      },
+    });
   }
 
   findOne(id: number): Promise<Pokemon> {

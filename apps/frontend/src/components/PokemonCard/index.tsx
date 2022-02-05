@@ -6,11 +6,15 @@ import { Pokemon } from '../../types/pokemon';
 import { StyledPokemonCard } from './styled';
 import Web3 from 'web3';
 import { BSC_TESTNET_ID } from '../../constants';
-import { useCreateOrderMutation } from '../../services/pokemon';
+import {
+  useCreateOrderMutation,
+  useGetPokemonListQuery,
+} from '../../services/pokemon';
 
 const PokemonCard: React.FC<{
   pokemon: Pokemon;
 }> = ({ pokemon }) => {
+  const { refetch } = useGetPokemonListQuery();
   const { active, chainId } = useWeb3React<Web3>();
   const id = pokemon.id;
   const { sendToken } = useWizeMoonContract();
@@ -27,6 +31,7 @@ const PokemonCard: React.FC<{
         toAddress: transaction.to,
         transactionJson: JSON.stringify(transaction),
       });
+      refetch();
     }
   };
 
@@ -41,11 +46,11 @@ const PokemonCard: React.FC<{
         Price: <strong>{pokemon.initialPrice} WIZEMOON</strong>
       </Typography>
       <Button
-        disabled={!active || chainId !== BSC_TESTNET_ID}
+        disabled={!active || chainId !== BSC_TESTNET_ID || !!pokemon.owner}
         onClick={handleBuyItem}
         title={active ? 'Click to Buy' : 'Connect wallet first'}
       >
-        BUY
+        {pokemon.owner ? 'SOLD' : 'BUY'}
       </Button>
     </StyledPokemonCard>
   );

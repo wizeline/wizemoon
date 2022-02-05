@@ -60,7 +60,7 @@ export class Order {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => Pokemon, (pokemon) => pokemon.orders)
+  @ManyToOne(() => Pokemon, (pokemon) => pokemon.orders, { cascade: true })
   @JoinColumn({
     name: 'pokemon_id',
   })
