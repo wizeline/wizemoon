@@ -6,6 +6,7 @@ import { PaymentService } from '../../providers/payment.service';
 import { Pokemon } from '../pokemons/entities/pokemon.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { OrderStatus } from './entities/order-status';
 import { Order } from './entities/order.entity';
 
 const { PUBLIC_ENDPOINT } = process.env;
@@ -35,7 +36,10 @@ export class OrdersService {
       pokemon.initialPrice
     );
     const dbTx = await getManager().transaction(async (transactionManager) => {
-      await transactionManager.insert(Order, orderEntity);
+      await transactionManager.insert(Order, {
+        ...orderEntity,
+        status: OrderStatus.Complete,
+      });
       await transactionManager.update(Pokemon, createOrderDto.pokemonId, {
         owner: createOrderDto.fromAddress,
       });

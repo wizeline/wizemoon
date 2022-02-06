@@ -6,7 +6,7 @@ ARG SERVICE_NAME
 
 # install dependencies for root package.json
 COPY package.json yarn.lock ./
-RUN yarn install --ignore-scripts
+RUN yarn install
 
 # Development image
 FROM dependency as development
