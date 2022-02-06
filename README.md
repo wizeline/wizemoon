@@ -18,8 +18,6 @@ https://testnet.binance.org/faucet-smart
 
 WIZEMOON Token Contract: https://testnet.bscscan.com/tx/0x8e42b0eb526244760e9ed6b50af43c75b4c06c23db714e32062f4805d698385b
 
-WIZEMOON Game Contract:
-
 WIZEMOON NFT Contract: https://testnet.bscscan.com/address/0x3ab575af7bb6f97dc14d8f815f7ce16d21138bfc#code
 
 ### Buy Token
