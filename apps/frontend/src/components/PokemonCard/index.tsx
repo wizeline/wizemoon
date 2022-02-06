@@ -43,6 +43,9 @@ const PokemonCard: React.FC<{
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
       />
       <Typography>
+        ID: <strong>{pokemon.id}</strong>
+      </Typography>
+      <Typography>
         Price: <strong>{pokemon.initialPrice} WIZEMOON</strong>
       </Typography>
       <Button

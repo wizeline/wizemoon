@@ -17,7 +17,7 @@ const ItemList: React.FC = () => {
       {error ? (
         <Alert type="error">Oh no, there was an error</Alert>
       ) : isLoading ? (
-        <Spin />
+        <Spin style={{ width: '100%', height: '50vh' }} />
       ) : pokemonList ? (
         <>
           {pokemonList.map((p) => (

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
 import Web3 from 'web3';
-import HDWalletProvider from '@truffle/hdwallet-provider';
 import { AbiItem } from 'web3-utils';
 import wizeMoonERC20ContractABI from '../config/contracts/wizemoon-nft-token.json';
 
@@ -9,15 +8,7 @@ const {
   BSC_RPC_ENDPOINT = '',
   NFT_CONTRACT_ADDRESS = '',
   NFT_MINTER_ACCOUNT_PRIVATE_KEY = '',
-  NFT_MINTER_ACCOUNT = '',
 } = process.env;
-
-function getWeb3Provider() {
-  return new HDWalletProvider({
-    privateKeys: [NFT_MINTER_ACCOUNT_PRIVATE_KEY],
-    providerOrUrl: BSC_RPC_ENDPOINT,
-  });
-}
 
 @Injectable()
 export class NftContractService {
@@ -25,16 +16,22 @@ export class NftContractService {
   web3: Web3;
   constructor() {
     this.web3 = new Web3(BSC_RPC_ENDPOINT);
+    const account = this.web3.eth.accounts.privateKeyToAccount(
+      `0x${NFT_MINTER_ACCOUNT_PRIVATE_KEY}`
+    );
+    this.web3.eth.accounts.wallet.add(account);
+    this.web3.eth.defaultAccount = account.address;
+
     this.contract = new this.web3.eth.Contract(
       wizeMoonERC20ContractABI as unknown as AbiItem[],
       NFT_CONTRACT_ADDRESS
     );
-    this.contract.setProvider(getWeb3Provider());
   }
 
   async mintNFT(receiver: string, itemUrl: string) {
     return this.contract.methods.safeMint(receiver, itemUrl).send({
-      from: NFT_MINTER_ACCOUNT,
+      from: this.web3.eth.defaultAccount,
+      gas: 2000000,
     });
   }
 

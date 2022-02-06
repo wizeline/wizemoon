@@ -10,7 +10,6 @@ import { DatabaseProviderModule } from '../../providers/database.module';
 import { HealthModule } from '../../endpoints/health/health.module';
 import { PokemonsModule } from '../../endpoints/pokemons/pokemons.module';
 import { OrdersModule } from '../../endpoints/orders/orders.module';
-import { NftContractModule } from '../../providers/ntf.contract.module';
 import { NftItemsModule } from '../../endpoints/nft-items/nft-items.module';
 
 @Module({
@@ -18,7 +17,6 @@ import { NftItemsModule } from '../../endpoints/nft-items/nft-items.module';
     ConfigModule.forRoot({
       envFilePath: `.env.${APP_ENV}`,
     }),
-    NftContractModule.forRoot(),
     DatabaseProviderModule,
     PokemonsModule,
     OrdersModule,
