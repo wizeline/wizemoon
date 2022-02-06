@@ -15,15 +15,15 @@ export class PaymentService {
     const txData = await this.web3.eth.getTransaction(txHash);
     const transferInput = this.getTxInput(txData);
     const bnTransferredAmount = toBN(transferInput.amount);
-    const bnPokemonPrice = toBN(Number(pokemonPrice) * 10 ** 18);
+    const bnPokemonPriceInAmount = this.convertToTokenAmount(pokemonPrice);
     Logger.debug(
-      `bnTransferredAmount=${bnTransferredAmount} ; bnPokemonPrice=${bnPokemonPrice}`
+      `bnTransferredAmount=${bnTransferredAmount} ; bnPokemonPriceInAmount=${bnPokemonPriceInAmount}`
     );
-    if (bnPokemonPrice.eq(bnTransferredAmount)) {
+    if (bnPokemonPriceInAmount.lte(bnTransferredAmount)) {
       return true;
     }
     throw new Error(
-      `Invalid payment expected: ${bnPokemonPrice} but only get: ${bnTransferredAmount}`
+      `Invalid payment expected: ${bnPokemonPriceInAmount} but only get: ${bnTransferredAmount}`
     );
   }
 
@@ -38,6 +38,14 @@ export class PaymentService {
         { internalType: 'uint256', name: 'amount', type: 'uint256' },
       ],
       `0x${txData.input.substring(10)}`
+    );
+  }
+
+  convertToTokenAmount(pokemonPrice: string) {
+    const tokenDecimals = 18;
+    const priceDecimals = 2;
+    return toBN(Math.round(Number(pokemonPrice) * 10 ** priceDecimals)).mul(
+      toBN(10 ** (tokenDecimals - priceDecimals))
     );
   }
 }
