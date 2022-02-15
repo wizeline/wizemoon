@@ -2,7 +2,7 @@
 
 This project is a demo of creating a game on blockchain.
 
-## Blockchain
+# Blockchain
 
 ### Wallet
 
@@ -24,31 +24,56 @@ WIZEMOON NFT Contract: https://testnet.bscscan.com/address/0x3ab575af7bb6f97dc14
 
 PancakeSwap Testnet: https://pancake.kiemtienonline360.com/#/swap
 
+# Development
 ## Prerequisite
 
 - Node
-
+- Docker
 ## Frontend
 
 `yarn start frontend`
 
 ## Backend
 
-### Game API
+### game-api service
 
-`docker compose up`
+- Prepare environment variables
 
-### Database migration
+```
+cp -n apps/game-api/.env.sample apps/game-api/.env.local
+```
 
-Currently, The project only supports run migration automatically when the app startup due to an issue of Webpack with TypeORM.
+- Start with Docker
 
-- Creating a new migration: `yarn typeorm migration:create -d apps/game-api/src/database/migrations -n NewMigration`
+```
+docker compose up
+```
 
-## Deployment
+- Generate database migration
 
-### Build
+```
+yarn nx run game-api:generate-migration  -n NewDBChange
+```
 
-- Frontend `yarn build frontend --target=production`
-- Game API `docker build -t game-api --build-arg=SERVICE_NAME=game-api --target=production .`
+- For more migration commands, look in `apps/game-api/project.json`
 
-  RUN : `docker run -p 3333:3333 --rm game-api`
+# Deployment
+
+## game-api
+
+- build image:
+  ```
+  docker build -t game-api --build-arg=SERVICE_NAME=game-api  --target=production .
+  ```
+- envs: `apps/game-api/.env.sample`
+
+## Frontend
+
+- Environment variables:
+  ```
+  NX_BOOKING_API_ORIGIN=https://game-api.sample.com
+  ```
+- Build
+  `yarn build frontend --config=production`
+
+  output: `dist/apps/frontend`

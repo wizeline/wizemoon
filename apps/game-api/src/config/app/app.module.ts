@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnApplicationBootstrap } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
@@ -11,6 +11,8 @@ import { HealthModule } from '../../endpoints/health/health.module';
 import { PokemonsModule } from '../../endpoints/pokemons/pokemons.module';
 import { OrdersModule } from '../../endpoints/orders/orders.module';
 import { NftItemsModule } from '../../endpoints/nft-items/nft-items.module';
+import { SeedingService } from '../../database/seeding/seeding.service';
+import { SeedingModule } from '../../database/seeding/seeding.module';
 
 @Module({
   imports: [
@@ -21,9 +23,15 @@ import { NftItemsModule } from '../../endpoints/nft-items/nft-items.module';
     PokemonsModule,
     OrdersModule,
     NftItemsModule,
+    SeedingModule,
     HealthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SeedingService],
 })
-export class AppModule {}
+export class AppModule implements OnApplicationBootstrap {
+  constructor(private readonly seedingService: SeedingService) {}
+  async onApplicationBootstrap() {
+    await this.seedingService.seed();
+  }
+}

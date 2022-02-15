@@ -23,7 +23,11 @@ export class PokemonsService {
       .get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
       .pipe(map((response) => response.data));
     const responseData = await lastValueFrom(observableResponse);
-    const pokemons = responseData.results.map(({ name, url }) => ({
+    return this.insertPokemonList(responseData.results);
+  }
+
+  async insertPokemonList(pokemonDtoList: any[]) {
+    const pokemons = pokemonDtoList.map(({ name, url }) => ({
       name: name,
       id: url
         .split('/')
