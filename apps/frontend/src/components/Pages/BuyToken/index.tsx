@@ -60,7 +60,7 @@ const BuyToken: React.FC = () => {
       <Typography>
         DEX - PancakeSwap Testnet{' '}
         <a
-          href="https://pancake.kiemtienonline360.com/#/swap"
+          href="https://pancake.kiemtienonline360.com/#/swap?inputCurrency=0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd&outputCurrency=0xc5B6A65F3759e5BDE0a4e426EbbeF7c16ff72133"
           target="_blank"
           rel="noreferrer"
         >
